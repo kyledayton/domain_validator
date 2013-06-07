@@ -20,11 +20,11 @@ Or install it yourself as:
 
 Add a 'domain' validation to your ActiveModel enabled class
 
-``ruby
+```ruby
 class User < ActiveRecord::Base
   validates :domain, :domain => true
 end
-``
+```
 
 ## Contributing
 
