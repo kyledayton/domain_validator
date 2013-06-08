@@ -26,6 +26,7 @@ Add a domain validation to your ActiveModel enabled class
 
 ```ruby
 class User < ActiveRecord::Base
+  attr_accessible :domain
   validates :domain, :domain => true
 end
 ```
