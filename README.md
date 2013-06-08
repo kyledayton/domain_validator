@@ -2,6 +2,8 @@
 
 ActiveModel vaidations for domains
 
+[![Build Status](https://travis-ci.org/kdayton-/domain_validator.png?branch=master)](https://travis-ci.org/kdayton-/domain_validator)
+
 ## Installation
 
 Add this line to your application's Gemfile:
