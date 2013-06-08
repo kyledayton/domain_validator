@@ -10,7 +10,7 @@ module DomainHelpers
   def invalid_domains
     [
       "notarealdomain",
-      "domain.withinvalidtld"
+      "invalid*chars.com"
     ]
   end
 

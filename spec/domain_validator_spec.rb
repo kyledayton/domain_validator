@@ -71,7 +71,7 @@ describe DomainValidator do
 
   describe "error messages" do
     context "when the :message option is not defined" do
-      subject { User.new :domain => "domain.withinvalidtld" }
+      subject { User.new :domain => "notadomain" }
       before { subject.valid? }
 
       it "should add the default message" do
@@ -80,7 +80,7 @@ describe DomainValidator do
     end
 
     context "when the :message option is defined" do
-      subject { UserWithMessage.new :domain => "domain.withinvalidtld" }
+      subject { UserWithMessage.new :domain => "notadomain" }
       before { subject.valid? }
 
       it "should add the customized message" do

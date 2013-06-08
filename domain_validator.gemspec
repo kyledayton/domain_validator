@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.email         = ["kyle@graphicflash.com"]
   spec.description   = %q{Adds ActiveModel validation for domain format.}
   spec.summary       = %q{Adds ActiveModel validation for domain format.}
-  spec.homepage      = ""
+  spec.homepage      = "http://github.com/kdayton-/domain_validator"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files`.split($/)
@@ -18,7 +18,6 @@ Gem::Specification.new do |spec|
   spec.test_files    = spec.files.grep(%r{^(test|spec|features)/})
   spec.require_paths = ["lib"]
 
-  spec.add_dependency "public_suffix"
   spec.add_dependency "activemodel"
 
   spec.add_development_dependency "bundler"
