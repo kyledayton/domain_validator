@@ -1,8 +1,9 @@
 # DomainValidator
 
-ActiveModel vaidations for domains
-
 [![Build Status](https://travis-ci.org/kdayton-/domain_validator.png?branch=master)](https://travis-ci.org/kdayton-/domain_validator)
+
+Adds a DomainValidator to ActiveModel, allowing for easy validation of FQDNs
+
 
 ## Installation
 
@@ -20,12 +21,22 @@ Or install it yourself as:
 
 ## Usage
 
-Add a 'domain' validation to your ActiveModel enabled class
+Add a domain validation to your ActiveModel enabled class
 
 ```ruby
 class User < ActiveRecord::Base
   validates :domain, :domain => true
 end
+```
+
+## Examples
+
+```ruby
+user = User.new :domain => 'mydomain.com'
+user.valid? # => true
+
+user.domain = 'invalid*characters.com'
+user.valid? # => false
 ```
 
 ## Contributing
