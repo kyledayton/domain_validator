@@ -1,3 +1,3 @@
 module DomainValidator
-  VERSION = [0, 0, 1].join "."
+  VERSION = [0, 0, 2].join "."
 end
