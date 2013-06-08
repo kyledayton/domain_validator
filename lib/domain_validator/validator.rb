@@ -8,7 +8,7 @@ module DomainValidator
     
     def validate_each(record, attr_name, value)
       valid_domain = is_valid_domain?(value)
-      record.errors.add(attr_name, "is not a valid domain") and return unless valid_domain
+      record.errors.add(attr_name, options[:message] || "is invalid") and return unless valid_domain
     end
 
     def is_valid_domain?(domain)
