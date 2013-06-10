@@ -41,6 +41,14 @@ user.domain = 'invalid*characters.com'
 user.valid? # => false
 ```
 
+## Compatibility
+
+DomainValidator is tested against:
+
+MRI 1.8.7, 1.9.3, 2.0.0
+JRuby 1.8, 1.9
+Rubinus 1.8
+
 ## Contributing
 
 1. Fork it
