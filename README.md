@@ -37,9 +37,10 @@ DomainValidator can also perform a DNS check using ruby's built-in Resolv librar
 class User < ActiveRecord::Base
   attr_accessible :domain
   validates :domain, :domain => {:verify_dns => true}
-  
+
   # Also supports a custom message when failing DNS check
   # validates :domain, :domain => {:verify_dns => {:message => "DNS check failed"}}
+```
 
 ## Examples
 
