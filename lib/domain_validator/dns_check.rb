@@ -1,4 +1,4 @@
-require 'resolv'
+require "resolv"
 
 module DomainValidator
   class DnsCheck

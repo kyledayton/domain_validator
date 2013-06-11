@@ -1,28 +1,5 @@
 require 'spec_helper'
-
-class User < Model
-  validates :domain, :domain => true
-end
-
-class UserAllowsNil < Model
-  validates :domain, :domain => {:allow_nil => true}
-end
-
-class UserAllowsNilFalse < Model
-  validates :domain, :domain => {:allow_nil => false}
-end
-
-class UserAllowsBlank < Model
-  validates :domain, :domain => {:allow_blank => true}
-end
-
-class UserAllowsBlankFalse < Model
-  validates :domain, :domain => {:allow_blank => false}
-end
-
-class UserWithMessage < Model
-  validates :domain, :domain => {:message => "isn't quite right"}
-end
+require 'support/models'
 
 describe DomainValidator do
   context "with valid domain" do
@@ -85,6 +62,54 @@ describe DomainValidator do
 
       it "should add the customized message" do
         subject.errors[:domain].should include "isn't quite right"
+      end
+    end
+
+    context "when :verify_dns has a :message option" do
+      subject { UserVerifyDNSMessage.new :domain => "a.com" }
+      before { subject.valid? }
+
+      it "should add the customized message" do
+        subject.errors[:domain].should include "failed DNS check"
+      end
+    end
+
+    context "when :verify_dns does not have a :message option" do
+      subject { UserVerifyDNS.new :domain => "a.com" }
+      before { subject.valid? }
+
+      it "should add the default message" do
+        subject.errors[:domain].should include "does not have a DNS record"
+      end
+    end
+  end
+
+  describe "DNS check" do
+    describe "a domain with a DNS record" do
+      it "should be valid when :verify_dns is true" do
+        UserVerifyDNS.new(:domain => "example.com").should be_valid
+      end
+
+      it "should be valid when :verify_dns is false" do
+        UserVerifyDNSFalse.new(:domain => "example.com").should be_valid
+      end
+
+      it "should be valid when :verify_dns is undefined" do
+        User.new(:domain => "example.com").should be_valid
+      end
+    end
+
+    describe "a domain without a DNS record" do
+      it "should not be valid when :verify_dns is true" do
+        UserVerifyDNS.new(:domain => "a.com").should_not be_valid
+      end
+
+      it "should be valid when :verify_dns is false" do
+        UserVerifyDNSFalse.new(:domain => "a.com").should be_valid
+      end
+
+      it "should be valid when :verify_dns is undefined" do
+        User.new(:domain => "a.com").should be_valid
       end
     end
   end

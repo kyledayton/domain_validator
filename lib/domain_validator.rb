@@ -1,2 +1,2 @@
-require 'domain_validator/dns_check'
-require 'domain_validator/validator'
+require "domain_validator/dns_check"
+require "domain_validator/validator"
