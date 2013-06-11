@@ -40,6 +40,7 @@ class User < ActiveRecord::Base
 
   # Also supports a custom message when failing DNS check
   # validates :domain, :domain => {:verify_dns => {:message => "DNS check failed"}}
+end
 ```
 
 ## Examples
