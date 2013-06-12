@@ -85,6 +85,13 @@ describe DomainValidator do
   end
 
   describe "DNS check" do
+    describe "an invalid domain" do
+      it "should not perform a DNS check" do
+        DomainValidator::DnsCheck.any_instance.should_not_receive(:has_record?)
+        UserVerifyDNS.new(:domain => "notadomain").should_not be_valid
+      end
+    end
+
     describe "a domain with a DNS record" do
       it "should be valid when :verify_dns is true" do
         UserVerifyDNS.new(:domain => "example.com").should be_valid
