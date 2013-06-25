@@ -8,7 +8,7 @@ module DomainValidator
 
     def validate_each(record, attr_name, value)
       validate_domain_format(record, attr_name, value)
-      # Only waste time with DNS check if record is invalid?
+      # Only perform DNS check if domain is a valid format
       validate_domain_dns(record, attr_name, value) if record.errors.empty? && options[:verify_dns]
     end
 
