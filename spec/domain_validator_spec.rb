@@ -4,45 +4,56 @@ require 'support/models'
 describe DomainValidator do
   context "with valid domain" do
     valid_domains.each do |domain|
+      user = User.new(:domain => domain)
+
       it "#{domain} should be valid" do
-        User.new(:domain => domain).should be_valid
+        expect(user).to be_valid
       end
     end
   end
 
   context "with invalid domain" do
     invalid_domains.each do |domain|
+      user = User.new(:domain => domain)
+
       it "#{domain} should be invalid" do
-        User.new(:domain => domain).should_not be_valid
+        expect(user).to_not be_valid
       end
     end
   end
 
   describe "nil domain" do
+
     it "should not be valid when :allow_nil option is missing" do
-      User.new(:domain => nil).should_not be_valid
+      user = User.new(:domain => nil)
+      expect(user).to_not be_valid
     end
 
     it "should be valid when :allow_nil option is true" do
-      UserAllowsNil.new(:domain => nil).should be_valid
+      user = UserAllowsNil.new(:domain => nil)
+      expect(user).to be_valid
     end
 
     it "should not be valid when :allow_nil option is false" do
-      UserAllowsNilFalse.new(:domain => nil).should_not be_valid
+      user = UserAllowsNilFalse.new(:domain => nil)
+      expect(user).to_not be_valid
     end
   end
 
   describe "blank domain" do
     it "should not be valid when :allow_blank option is missing" do
-      User.new(:domain => "   ").should_not be_valid
+      user = User.new(:domain => "   ")
+      expect(user).to_not be_valid
     end
 
     it "should be valid when :allow_blank option is true" do
-      UserAllowsBlank.new(:domain => "   ").should be_valid
+      user = UserAllowsBlank.new(:domain => "   ")
+      expect(user).to be_valid
     end
 
     it "should not be valid when :allow_blank option is false" do
-      UserAllowsBlankFalse.new(:domain => "   ").should_not be_valid
+      user = UserAllowsBlankFalse.new(:domain => "   ")
+      expect(user).to_not be_valid
     end
   end
 
@@ -52,7 +63,7 @@ describe DomainValidator do
       before { subject.valid? }
 
       it "should add the default message" do
-        subject.errors[:domain].should include "is invalid"
+        expect(subject.errors[:domain]).to include "is invalid"
       end
     end
 
@@ -61,7 +72,7 @@ describe DomainValidator do
       before { subject.valid? }
 
       it "should add the customized message" do
-        subject.errors[:domain].should include "isn't quite right"
+        expect(subject.errors[:domain]).to include "isn't quite right"
       end
     end
 
@@ -70,7 +81,7 @@ describe DomainValidator do
       before { subject.valid? }
 
       it "should add the customized message" do
-        subject.errors[:domain].should include "failed DNS check"
+        expect(subject.errors[:domain]).to include "failed DNS check"
       end
     end
 
@@ -79,7 +90,7 @@ describe DomainValidator do
       before { subject.valid? }
 
       it "should add the default message" do
-        subject.errors[:domain].should include "does not have a DNS record"
+        expect(subject.errors[:domain]).to include "does not have a DNS record"
       end
     end
   end
@@ -87,36 +98,43 @@ describe DomainValidator do
   describe "DNS check" do
     describe "an invalid domain" do
       it "should not perform a DNS check" do
-        DomainValidator::DnsCheck.any_instance.should_not_receive(:has_record?)
-        UserVerifyDNS.new(:domain => "notadomain").should_not be_valid
+        expect_any_instance_of(DomainValidator::DnsCheck).to_not receive(:has_record?)
+        user = UserVerifyDNS.new(:domain => "notadomain")
+        expect(user).to_not be_valid
       end
     end
 
     describe "a domain with a DNS record" do
       it "should be valid when :verify_dns is true" do
-        UserVerifyDNS.new(:domain => "example.com").should be_valid
+        user = UserVerifyDNS.new(:domain => "example.com")
+        expect(user).to be_valid
       end
 
       it "should be valid when :verify_dns is false" do
-        UserVerifyDNSFalse.new(:domain => "example.com").should be_valid
+        user = UserVerifyDNSFalse.new(:domain => "example.com")
+        expect(user).to be_valid
       end
 
       it "should be valid when :verify_dns is undefined" do
-        User.new(:domain => "example.com").should be_valid
+        user = User.new(:domain => "example.com")
+        expect(user).to be_valid
       end
     end
 
     describe "a domain without a DNS record" do
       it "should not be valid when :verify_dns is true" do
-        UserVerifyDNS.new(:domain => "a.com").should_not be_valid
+        user = UserVerifyDNS.new(:domain => "a.com")
+        expect(user).to_not be_valid
       end
 
       it "should be valid when :verify_dns is false" do
-        UserVerifyDNSFalse.new(:domain => "a.com").should be_valid
+        user = UserVerifyDNSFalse.new(:domain => "a.com")
+        expect(user).to be_valid
       end
 
       it "should be valid when :verify_dns is undefined" do
-        User.new(:domain => "a.com").should be_valid
+        user = User.new(:domain => "a.com")
+        expect(user).to be_valid
       end
     end
   end
