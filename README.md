@@ -57,9 +57,9 @@ user.valid? # => false
 
 DomainValidator is tested against:
 
-MRI 1.8.7, 1.9.3, 2.0.0  
-JRuby 1.8, 1.9  
-Rubinus 1.8
+MRI 1.9.3, 2.0, 2.1.1, 2.1.2
+JRuby 1.9  
+Rubinus 2.1.1
 
 ## Contributing
 
