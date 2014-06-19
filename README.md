@@ -1,7 +1,7 @@
 # DomainValidator
 
-[![Build Status](https://travis-ci.org/kdayton-/domain_validator.png?branch=master)](https://travis-ci.org/kdayton-/domain_validator)
-[![Code Climate](https://codeclimate.com/github/kdayton-/domain_validator.png)](https://codeclimate.com/github/kdayton-/domain_validator)
+[![Build Status](https://travis-ci.org/kyledayton/domain_validator.png?branch=master)](https://travis-ci.org/kyledayton/domain_validator)
+[![Code Climate](https://codeclimate.com/github/kyledayton/domain_validator.png)](https://codeclimate.com/github/kyledayton/domain_validator)
 
 Adds a DomainValidator to ActiveModel, allowing for easy validation of FQDNs
 
